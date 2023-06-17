@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "865090002544",
+    "project_id": "jmate-ae634",
+    "storage_bucket": "jmate-ae634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865090002544:android:3468252c44d8219350deb5",
+        "android_client_info": {
+          "package_name": "com.example.jmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865090002544-rhoo1otrr2gjkm6k369uo6tfk3aoa8vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd8AbmQz8gKuiKnEnUYW7niq2_7BkVvGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865090002544-rhoo1otrr2gjkm6k369uo6tfk3aoa8vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
