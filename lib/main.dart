@@ -3,6 +3,7 @@ import 'profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'signup_page.dart';
 import 'login_page.dart';
+
 // void main() {
 //   FirebaseApp.initializeApp();
 
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/profile': (context) => ProfilePage(),
         '/signup': (context) => SignUpPage(),
-        '/login': (context) => LoginPage()
+        '/login': (context) => LoginPage(),
+        
+
       },
     );
   }

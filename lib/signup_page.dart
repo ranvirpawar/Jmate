@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'login_page.dart';
+import 'profile_page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -36,18 +37,17 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: _firstNameController,
-              decoration: InputDecoration(labelText: 'First Name'),
-            ),
-            TextFormField(
-              controller: _lastNameController,
-              decoration: InputDecoration(labelText: 'Last Name'),
-            ),
-            TextFormField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
-            ),
+            
+                TextFormField(
+                  controller: _firstNameController,
+                  decoration: InputDecoration(labelText: 'First Name'),
+                ),
+                TextFormField(
+                  controller: _lastNameController,
+                  decoration: InputDecoration(labelText: 'Last Name'),
+                ),
+              
+            
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(labelText: 'Email'),
@@ -72,6 +72,21 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               child: Text('Sign Up'),
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text(
+                'Already a member? Login',
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -82,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
     // Retrieve the user input from the text controllers
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
-    String username = _usernameController.text;
+    // String username = _usernameController.text;
     String email = _emailController.text;
     String mobileNumber = _mobileNumberController.text;
     String password = _passwordController.text;
@@ -91,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
     // Validate the user input
     if (firstName.isEmpty ||
         lastName.isEmpty ||
-        username.isEmpty ||
+        // username.isEmpty ||
         email.isEmpty ||
         mobileNumber.isEmpty ||
         password.isEmpty ||
@@ -147,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
       // Store additional user data in the Firebase Realtime Database
       String userId = userCredential.user!.uid;
-      User user = User(firstName, lastName, username, mobileNumber, password);
+      User user = User(firstName, lastName, mobileNumber, password);
       _databaseReference.child('users').child(userId).set(user.toJson());
 
       // Show a success dialog
@@ -201,18 +216,18 @@ class _SignUpPageState extends State<SignUpPage> {
 class User {
   String firstName;
   String lastName;
-  String username;
+  // String username;
   String mobileNumber;
   String password;
 
-  User(this.firstName, this.lastName, this.username, this.mobileNumber,
+  User(this.firstName, this.lastName,  this.mobileNumber,
       this.password);
 
   Map<String, dynamic> toJson() {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'username': username,
+      // 'username': username,
       'mobileNumber': mobileNumber,
       'password': password,
     };

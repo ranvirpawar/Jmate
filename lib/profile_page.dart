@@ -1,6 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Fetch user details
+    fetchUserDetails();
+  }
+
+  Future<void> fetchUserDetails() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // Update the text controllers with the user's name
+      _firstNameController.text = user.displayName ?? '';
+    }
+  }
+
+  Future<void> updateUserProfile() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // Update user data in the database
+      // Example: Use Firebase Realtime Database or Firestore to update user data
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,54 +41,31 @@ class ProfilePage extends StatelessWidget {
         title: Text('Profile'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundImage: AssetImage('assets/profile_image.jpg'),
-              ),
-              SizedBox(height: 16),
-              Text(
-                'First Name',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Last Name',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 16),
-              ListTile(
-                leading: Icon(Icons.phone),
-                title: Text('Mobile Number'),
-              ),
-              ListTile(
-                leading: Icon(Icons.email),
-                title: Text('Email'),
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  // Add functionality for editing profile
-                },
-                child: Text('Edit Profile'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Add functionality for logging out
-                },
-                child: Text('Logout'),
-              ),
-            ],
-          ),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Welcome ${_firstNameController.text}!', // Display the user's name
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _firstNameController,
+              decoration: InputDecoration(labelText: 'First Name'),
+            ),
+            TextFormField(
+              controller: _lastNameController,
+              decoration: InputDecoration(labelText: 'Last Name'),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                updateUserProfile();
+              },
+              child: Text('Save'),
+            ),
+          ],
         ),
       ),
     );
