@@ -89,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  datetime_picker_field_platform:
+    dependency: "direct main"
+    description:
+      name: datetime_picker_field_platform
+      sha256: "1638532dfb5ab90ac68c006284fc17a91a3a43f60fe134d38143fb630084dcb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -230,6 +238,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_datetime_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_datetime_picker
+      sha256: "8e695c63c769350e541951227c2775190ec73ceda774a315b1dc9a99d5facfe5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -336,6 +352,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
+  jiffy:
+    dependency: transitive
+    description:
+      name: jiffy
+      sha256: c3c1da3fe0c08bba3c2c455e8a3e724dfe7ea34dbe8069b992cab90ea1fe40b6
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.1"
   js:
     dependency: transitive
     description:

@@ -5,6 +5,7 @@ import 'package:jmate/login_page.dart';
 import 'profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'signup_page.dart';
+import 'postride.dart';
 
 // import 'homepage.dart';
 // void main() {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpPage(),
         '/login': (context) => LoginPage(),
         '/display': (context) => DisplayPage(),
+        '/postride':(context) => PostRidePage()
       },
     );
   }

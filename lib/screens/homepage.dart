@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jmate/booking.dart';
 import 'package:jmate/display.dart';
+import 'package:jmate/postride.dart';
+import 'package:jmate/showride.dart';
 
 void main() {
   runApp(Homepage());
@@ -14,9 +17,9 @@ class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),
+    ShowRidePage(),
     ExploreScreen(),
-    PostScreen(),
+    PostRidePage(),
     NotificationScreen(),
     DisplayPage(),
   ];
