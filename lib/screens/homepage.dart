@@ -36,7 +36,19 @@ class _HomepageState extends State<Homepage> {
         builder: (BuildContext context) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Journey-Mate'),
+              title: Text(
+                'Journey-Mate',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              backgroundColor: Colors.deepPurple,
+              elevation: 0, // Remove the shadow below the AppBar
+              centerTitle: true,
             ),
             body: _screens[_currentIndex],
             bottomNavigationBar: Theme(
@@ -54,27 +66,30 @@ class _HomepageState extends State<Homepage> {
                 },
                 items: [
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.home, color: Colors.black),
+                    icon: Icon(Icons.home),
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.explore, color: Colors.black),
+                    icon: Icon(Icons.explore),
                     label: 'Explore',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.add, color: Colors.black),
+                    icon: Icon(Icons.add),
                     label: 'Post',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications, color: Colors.black),
-                    label: 'Notification',
+                    icon: Icon(Icons.notifications),
+                    label: 'Notifications',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.person, color: Colors.black),
+                    icon: Icon(Icons.person),
                     label: 'You',
-                    
                   ),
                 ],
+                selectedItemColor:
+                    Colors.deepPurple, // Set the selected item color
+                unselectedItemColor:
+                    Colors.black, // Set the unselected item color
               ),
             ),
           );

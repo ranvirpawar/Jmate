@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class PostRidePage extends StatefulWidget {
   @override
@@ -12,18 +13,18 @@ class _PostRidePageState extends State<PostRidePage> {
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _destinationController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _timeController = TextEditingController();
   final TextEditingController _seatsController = TextEditingController();
   final TextEditingController _rideCostController = TextEditingController();
 
   User? _currentUser;
   DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
+  DateTime? _minimumDate;
 
   @override
   void initState() {
     super.initState();
     _fetchCurrentUser();
+    _setMinimumDate();
   }
 
   Future<void> _fetchCurrentUser() async {
@@ -33,13 +34,17 @@ class _PostRidePageState extends State<PostRidePage> {
     });
   }
 
+  void _setMinimumDate() {
+    final now = DateTime.now();
+    _minimumDate = DateTime(now.year, now.month, now.day);
+  }
+
   void _postRide() {
     if (_currentUser != null) {
       String userId = _currentUser!.uid;
       String source = _sourceController.text;
       String destination = _destinationController.text;
       String date = _dateController.text;
-      String time = _timeController.text;
       int seats = int.tryParse(_seatsController.text) ?? 0;
       double rideCost = double.tryParse(_rideCostController.text) ?? 0.0;
 
@@ -47,7 +52,6 @@ class _PostRidePageState extends State<PostRidePage> {
         'source': source,
         'destination': destination,
         'date': date,
-        'time': time,
         'seats': seats,
         'rideCost': rideCost,
         'userId': userId
@@ -95,9 +99,6 @@ class _PostRidePageState extends State<PostRidePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Post a Ride'),
-      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -116,11 +117,13 @@ class _PostRidePageState extends State<PostRidePage> {
                 DatePicker.showDatePicker(
                   context,
                   showTitleActions: true,
+                  minTime: _minimumDate!,
+                  currentTime: _minimumDate!,
                   onConfirm: (date) {
                     setState(() {
                       _selectedDate = date;
                       _dateController.text =
-                          date.toString(); // Update the text field
+                          DateFormat('yyyy-MM-dd').format(date);
                     });
                   },
                 );
@@ -130,29 +133,6 @@ class _PostRidePageState extends State<PostRidePage> {
                   controller: _dateController,
                   decoration: InputDecoration(
                     labelText: 'Date',
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                DatePicker.showTimePicker(
-                  context,
-                  showTitleActions: true,
-                  onConfirm: (time) {
-                    setState(() {
-                      _selectedTime = TimeOfDay.fromDateTime(time);
-                      _timeController.text = _selectedTime!
-                          .format(context); // Update the text field
-                    });
-                  },
-                );
-              },
-              child: AbsorbPointer(
-                child: TextFormField(
-                  controller: _timeController,
-                  decoration: InputDecoration(
-                    labelText: 'Time',
                   ),
                 ),
               ),

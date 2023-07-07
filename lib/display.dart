@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jmate/login_page.dart';
 
 class DisplayPage extends StatefulWidget {
   @override
@@ -37,23 +38,105 @@ class _DisplayPageState extends State<DisplayPage> {
         });
       }
     }
-  }// show
+  }
+
+  void _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Center(
         child: _currentUser != null && _userDetails != null
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      'Name: ${_userDetails!['firstName']} ${_userDetails!['lastName']}'),
-                  Text('Email: ${_currentUser!.email}'),
-                  Text('Mobile Number: ${_userDetails!['mobileNumber']}'),
-                  Text('Username: ${_userDetails!['username']}'),
-                  // You can display other user details here
-                ],
+            ? Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Text(
+                        'Name',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${_userDetails!['firstName']} ${_userDetails!['lastName']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      leading: Icon(
+                        Icons.person,
+                        size: 30,
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text(
+                        'Email',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        _currentUser!.email!,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      leading: Icon(
+                        Icons.email,
+                        size: 30,
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text(
+                        'Mobile Number',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        _userDetails!['mobileNumber'],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      leading: Icon(
+                        Icons.phone,
+                        size: 30,
+                      ),
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text(
+                        'Username',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        _userDetails!['username'],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      leading: Icon(
+                        Icons.person_pin,
+                        size: 30,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => _logout(context),
+                      child: Text('Logout'),
+                    ),
+                  ],
+                ),
               )
             : CircularProgressIndicator(),
       ),

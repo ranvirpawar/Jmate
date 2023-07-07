@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'booking.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowRidePage extends StatelessWidget {
   @override
@@ -92,11 +93,26 @@ class PostCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Username: ${username ?? ''}'),
+            Text(
+              '${username ?? ''}',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 8.0),
-            Text('Join me From ${source ?? ''} to ${destination ?? ''}'),
-            Text('On ${date ?? ''} ${time ?? ''}'),
-            Text('Cost: ${cost.toStringAsFixed(2)}'),
+            Text('Join me From ${source ?? ''} to ${destination ?? ''}',
+                style: GoogleFonts.lato()),
+            Text(
+              'On ${date ?? ''} ${time ?? ''}',
+              style: GoogleFonts.lato(),
+            ),
+            Text(
+              'Cost: ${cost.toStringAsFixed(2)}',
+              style: TextStyle(
+                fontFamily: 'SansSerif', // Set the font family to sans serif
+              ),
+            ),
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {

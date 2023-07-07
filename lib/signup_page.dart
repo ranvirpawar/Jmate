@@ -74,6 +74,12 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               child: Text('Sign Up'),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+                child: Text("Login"))
           ],
         ),
       ),

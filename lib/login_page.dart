@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:jmate/signup_page.dart';
 import 'screens/homepage.dart';
 import 'display.dart';
 // import 'profile_page.dart';
@@ -47,6 +48,12 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Text('Login'),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()));
+                },
+                child: Text("SignUp"))
           ],
         ),
       ),
