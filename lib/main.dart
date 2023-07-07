@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jmate/display.dart';
+import 'package:jmate/login_page.dart';
+// import 'package:jmate/screens/homepage%20.dart';
 import 'profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'signup_page.dart';
-import 'login_page.dart';
 
+// import 'homepage.dart';
 // void main() {
 //   FirebaseApp.initializeApp();
 
@@ -23,16 +26,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      initialRoute: '/signup',
+      initialRoute: '/login',
       routes: {
         '/profile': (context) => ProfilePage(),
         '/signup': (context) => SignUpPage(),
         '/login': (context) => LoginPage(),
-        
-
+        '/display': (context) => DisplayPage(),
       },
     );
   }

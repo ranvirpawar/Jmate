@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'screens/homepage.dart';
+import 'display.dart';
 // import 'profile_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final DatabaseReference _databaseReference =
       FirebaseDatabase.instance.reference();
+  final CollectionReference _usersCollection =
+      FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -51,75 +56,53 @@ class _LoginPageState extends State<LoginPage> {
   void login() async {
     String username = _emailController.text;
     String password = _passwordController.text;
-
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: username, // Use the email as the username
         password: password,
       );
-
       String userId = userCredential.user!.uid;
 
-      DatabaseEvent event =
-          await _databaseReference.child('users').child(userId).once();
+      print(userId);
 
-      DataSnapshot snapshot = event.snapshot;
+      DocumentSnapshot snapshot = await _usersCollection.doc(userId).get();
 
-      if (snapshot.value != null) {
-        Map<dynamic, dynamic>? snapshotValue =
-            snapshot.value as Map<dynamic, dynamic>?;
+      if (snapshot.exists) {
+        Map<String, dynamic>? userData =
+            snapshot.data() as Map<String, dynamic>?;
 
-        if (snapshotValue != null) {
-          Map<dynamic, dynamic> userData = snapshotValue;
-
-          if (userData['password'] == password) {
-            // Successful login
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Success'),
-                  content: Text('Login successful.'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-          } else {
-            // Invalid password
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Error'),
-                  content: Text('Invalid password.'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
+        if (userData != null && userData['password'] == password) {
+          // Successful login
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Success'),
+                content: Text('Login successful.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Homepage()),
+          );
         } else {
-          // User not found
+          // Invalid password
           showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Error'),
-                content: Text('User not found.'),
+                content: Text('Invalid password.'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -132,6 +115,25 @@ class _LoginPageState extends State<LoginPage> {
             },
           );
         }
+      } else {
+        // User not found
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('User not found.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
       }
     } catch (error) {
       // Login error
