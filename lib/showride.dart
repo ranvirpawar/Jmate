@@ -52,6 +52,7 @@ class ShowRidePage extends StatelessWidget {
                     date: data['date'] ?? '',
                     time: data['time'] ?? '',
                     cost: (data['rideCost'] ?? 0.0).toDouble(),
+                    rideId: doc.id, // Pass the rideId to the PostCard widget
                   );
                 },
               );
@@ -70,6 +71,7 @@ class PostCard extends StatelessWidget {
   final String date;
   final String time;
   final double cost;
+  final String rideId; // Add rideId as a parameter
 
   PostCard({
     required this.username,
@@ -78,6 +80,7 @@ class PostCard extends StatelessWidget {
     required this.date,
     required this.time,
     required this.cost,
+    required this.rideId, // Update the constructor
   });
 
   @override
@@ -97,7 +100,55 @@ class PostCard extends StatelessWidget {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Handle seat booking logic
+                User? currentUser = FirebaseAuth.instance.currentUser;
+                if (currentUser != null) {
+                  String userId = currentUser.uid;
+                  String connectRideId =
+                      rideId; // Use a different variable name to avoid shadowing
+
+                  try {
+                    FirebaseFirestore.instance
+                        .collection('bookRide')
+                        .add({'userId': userId, 'rideId': connectRideId});
+
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Success'),
+                          content: Text('Connection created successfully.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } catch (error) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                          content: Text(
+                              'An error occurred while creating the connection.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }
               },
               child: Text('Connect'),
             ),

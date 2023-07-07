@@ -3,6 +3,7 @@ import 'package:jmate/booking.dart';
 import 'package:jmate/display.dart';
 import 'package:jmate/postride.dart';
 import 'package:jmate/showride.dart';
+import 'package:jmate/connect.dart';
 
 void main() {
   runApp(Homepage());
@@ -18,7 +19,7 @@ class _HomepageState extends State<Homepage> {
 
   final List<Widget> _screens = [
     ShowRidePage(),
-    ExploreScreen(),
+    ConnectPage(),
     PostRidePage(),
     NotificationScreen(),
     DisplayPage(),
@@ -71,6 +72,7 @@ class _HomepageState extends State<Homepage> {
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person, color: Colors.black),
                     label: 'You',
+                    
                   ),
                 ],
               ),
