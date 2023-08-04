@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/display': (context) => DisplayPage(),
         '/postride':(context) => PostRidePage()
+        
       },
     );
   }

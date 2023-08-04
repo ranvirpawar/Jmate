@@ -54,7 +54,7 @@ class _PostRidePageState extends State<PostRidePage> {
         'date': date,
         'seats': seats,
         'rideCost': rideCost,
-        'userId': userId
+        'driverId': userId
       }).then((_) {
         showDialog(
           context: context,

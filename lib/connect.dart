@@ -32,9 +32,10 @@ class ConnectPage extends StatelessWidget {
               Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
               String userId = data['userId'] ?? '';
               String rideId = data['rideId'] ?? '';
+              String driverId = data['driverId'] ?? '';
 
-              if (userId == currentUserId) {
-                return SizedBox.shrink(); // Exclude the current user's ride details
+              if (userId == currentUserId || driverId != currentUserId) {
+                return SizedBox.shrink(); // Exclude non-relevant ride details
               }
 
               return FutureBuilder<Map<String, dynamic>>(
@@ -57,6 +58,7 @@ class ConnectPage extends StatelessWidget {
                     mobileNumber: userData['mobileNumber'] ?? '',
                     source: postRideData['source'] ?? '',
                     destination: postRideData['destination'] ?? '',
+                    date: postRideData['date'] ?? '',
                   );
                 },
               );
@@ -74,7 +76,7 @@ class ConnectPage extends StatelessWidget {
         .get();
 
     DocumentSnapshot postRideSnapshot = await FirebaseFirestore.instance
-        .collection('postRide')
+        .collection('postride')
         .doc(rideId)
         .get();
 
@@ -93,12 +95,14 @@ class RideCard extends StatelessWidget {
   final String mobileNumber;
   final String source;
   final String destination;
+  final String date;
 
   RideCard({
     required this.username,
     required this.mobileNumber,
     required this.source,
     required this.destination,
+    required this.date,
   });
 
   @override
@@ -114,8 +118,7 @@ class RideCard extends StatelessWidget {
             SizedBox(height: 8.0),
             Text('Mobile Number: $mobileNumber'),
             SizedBox(height: 8.0),
-            Text('Source: $source'),
-            Text('Destination: $destination'),
+            Text('Interested in your journey from $source to $destination on $date'),
           ],
         ),
       ),

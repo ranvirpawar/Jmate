@@ -19,7 +19,7 @@ class _HomepageState extends State<Homepage> {
 
   final List<Widget> _screens = [
     ShowRidePage(),
-    ConnectPage(),
+     ConnectPage(),
     PostRidePage(),
     NotificationScreen(),
     DisplayPage(),
