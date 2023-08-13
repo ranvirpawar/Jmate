@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:jmate/screens/homepage.dart';
 
 class PostRidePage extends StatefulWidget {
   @override
@@ -65,8 +66,14 @@ class _PostRidePageState extends State<PostRidePage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                   Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Homepage(),
+                    ),
+                  );
                     // Redirect to the desired page
+                    
                   },
                   child: Text('OK'),
                 ),
