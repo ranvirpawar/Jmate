@@ -230,7 +230,9 @@ class ShowRidePage extends StatelessWidget {
                     date: data['date'] ?? '',
                     time: data['time'] ?? '',
                     cost: (data['rideCost'] ?? 0.0).toDouble(),
-                    rideId: doc.id, // Pass the rideId to the PostCard widget
+                    rideId: doc.id,
+                    vehicle: data['vehicle'] ??
+                        '', // Pass the rideId to the PostCard widget
                   );
                 },
               );
@@ -249,7 +251,8 @@ class PostCard extends StatelessWidget {
   final String date;
   final String time;
   final double cost;
-  final String rideId; // Add rideId as a parameter
+  final String rideId;
+  final String vehicle; // Add rideId as a parameter
 
   PostCard({
     required this.username,
@@ -258,7 +261,8 @@ class PostCard extends StatelessWidget {
     required this.date,
     required this.time,
     required this.cost,
-    required this.rideId, // Update the constructor
+    required this.rideId,
+    required this.vehicle, // Update the constructor
   });
 
   @override
@@ -282,6 +286,10 @@ class PostCard extends StatelessWidget {
                 style: GoogleFonts.lato()),
             Text(
               'On ${date ?? ''} ${time ?? ''}',
+              style: GoogleFonts.lato(),
+            ),
+            Text(
+              'Vehicle: ${vehicle ?? ''}', // Display the vehicle
               style: GoogleFonts.lato(),
             ),
             Text(

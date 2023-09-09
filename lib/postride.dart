@@ -49,7 +49,8 @@ class _PostRidePageState extends State<PostRidePage> {
       String destination = _destinationController.text;
       String date = _dateController.text;
       String vehicle = _selectedVehicle;
-      int seats = vehicle == 'Bike' ? 1 : int.tryParse(_seatsController.text) ?? 0;
+      int seats =
+          vehicle == 'Bike' ? 1 : int.tryParse(_seatsController.text) ?? 0;
       double rideCost = double.tryParse(_rideCostController.text) ?? 0.0;
 
       FirebaseFirestore.instance.collection('postride').add({
@@ -58,7 +59,8 @@ class _PostRidePageState extends State<PostRidePage> {
         'date': date,
         'seats': seats,
         'rideCost': rideCost,
-        'driverId': userId
+        'driverId': userId,
+        'vehicle': vehicle,
       }).then((_) {
         showDialog(
           context: context,

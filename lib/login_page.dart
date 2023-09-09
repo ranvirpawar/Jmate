@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jmate/signup_page.dart';
 import 'screens/homepage.dart';
 import 'display.dart';
-// import 'profile_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -24,37 +23,68 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(
+          'Journey-Mate',
+          textAlign: TextAlign.center,
+        ),
+        centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          width: 300,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    login();
+                  },
+                  child: Text('Login'),
+                ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                    );
+                  },
+                  child: Text("Sign Up"),
+                ),
+              ],
             ),
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                login();
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => ProfilePage()));
-              },
-              child: Text('Login'),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()));
-                },
-                child: Text("SignUp"))
-          ],
+          ),
         ),
       ),
     );
@@ -66,12 +96,10 @@ class _LoginPageState extends State<LoginPage> {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: username, // Use the email as the username
+        email: username,
         password: password,
       );
       String userId = userCredential.user!.uid;
-
-      print(userId);
 
       DocumentSnapshot snapshot = await _usersCollection.doc(userId).get();
 
@@ -80,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
             snapshot.data() as Map<String, dynamic>?;
 
         if (userData != null && userData['password'] == password) {
-          // Successful login
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -103,7 +130,6 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => Homepage()),
           );
         } else {
-          // Invalid password
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -123,7 +149,6 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       } else {
-        // User not found
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -143,13 +168,12 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     } catch (error) {
-      // Login error
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('An error occurred while logging in.'),
+            content: Text('An error occurred, please check credentials.'),
             actions: [
               TextButton(
                 onPressed: () {
