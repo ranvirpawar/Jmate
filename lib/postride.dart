@@ -16,6 +16,8 @@ class _PostRidePageState extends State<PostRidePage> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _seatsController = TextEditingController();
   final TextEditingController _rideCostController = TextEditingController();
+  final List<String> _vehicleOptions = ['Bike', 'Car'];
+  String _selectedVehicle = 'Car'; // Default value is car
 
   User? _currentUser;
   DateTime? _selectedDate;
@@ -46,7 +48,8 @@ class _PostRidePageState extends State<PostRidePage> {
       String source = _sourceController.text;
       String destination = _destinationController.text;
       String date = _dateController.text;
-      int seats = int.tryParse(_seatsController.text) ?? 0;
+      String vehicle = _selectedVehicle;
+      int seats = vehicle == 'Bike' ? 1 : int.tryParse(_seatsController.text) ?? 0;
       double rideCost = double.tryParse(_rideCostController.text) ?? 0.0;
 
       FirebaseFirestore.instance.collection('postride').add({
@@ -66,14 +69,12 @@ class _PostRidePageState extends State<PostRidePage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                   Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Homepage(),
-                    ),
-                  );
-                    // Redirect to the desired page
-                    
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Homepage(),
+                      ),
+                    );
                   },
                   child: Text('OK'),
                 ),
@@ -106,59 +107,119 @@ class _PostRidePageState extends State<PostRidePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Post a Ride'),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
+            _buildStadiumTextField(
               controller: _sourceController,
-              decoration: InputDecoration(labelText: 'Source'),
+              labelText: 'Source',
             ),
-            TextFormField(
+            SizedBox(height: 10),
+            _buildStadiumTextField(
               controller: _destinationController,
-              decoration: InputDecoration(labelText: 'Destination'),
+              labelText: 'Destination',
             ),
-            InkWell(
-              onTap: () {
-                DatePicker.showDatePicker(
-                  context,
-                  showTitleActions: true,
-                  minTime: _minimumDate!,
-                  currentTime: _minimumDate!,
-                  onConfirm: (date) {
-                    setState(() {
-                      _selectedDate = date;
-                      _dateController.text =
-                          DateFormat('yyyy-MM-dd').format(date);
-                    });
-                  },
-                );
-              },
-              child: AbsorbPointer(
-                child: TextFormField(
-                  controller: _dateController,
-                  decoration: InputDecoration(
-                    labelText: 'Date',
-                  ),
-                ),
-              ),
-            ),
-            TextFormField(
+            SizedBox(height: 10),
+            _buildDateInput(),
+            SizedBox(height: 10),
+            _buildVehicleDropdown(),
+            SizedBox(height: 10),
+            _buildStadiumTextField(
               controller: _seatsController,
-              decoration: InputDecoration(labelText: 'Available Seats'),
+              labelText: 'Available Seats',
               keyboardType: TextInputType.number,
             ),
-            TextFormField(
+            SizedBox(height: 10),
+            _buildStadiumTextField(
               controller: _rideCostController,
-              decoration: InputDecoration(labelText: 'Ride Cost'),
+              labelText: 'Ride Cost',
               keyboardType: TextInputType.number,
             ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: _postRide,
               child: Text('Post Ride'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStadiumTextField({
+    required TextEditingController controller,
+    required String labelText,
+    TextInputType? keyboardType,
+  }) {
+    return Container(
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+        ),
+        keyboardType: keyboardType,
+      ),
+    );
+  }
+
+  Widget _buildDateInput() {
+    return InkWell(
+      onTap: () {
+        DatePicker.showDatePicker(
+          context,
+          showTitleActions: true,
+          minTime: _minimumDate!,
+          currentTime: _minimumDate!,
+          onConfirm: (date) {
+            setState(() {
+              _selectedDate = date;
+              _dateController.text = DateFormat('yyyy-MM-dd').format(date);
+            });
+          },
+        );
+      },
+      child: AbsorbPointer(
+        child: _buildStadiumTextField(
+          controller: _dateController,
+          labelText: 'Date',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVehicleDropdown() {
+    return Container(
+      child: DropdownButtonFormField<String>(
+        value: _selectedVehicle,
+        items: _vehicleOptions.map((String vehicle) {
+          return DropdownMenuItem<String>(
+            value: vehicle,
+            child: Text(vehicle),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            _selectedVehicle = newValue!;
+            if (_selectedVehicle == 'Bike') {
+              _seatsController.text = '1';
+            }
+          });
+        },
+        decoration: InputDecoration(
+          labelText: 'Vehicle',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
         ),
       ),
     );
