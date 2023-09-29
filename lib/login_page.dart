@@ -29,61 +29,48 @@ class _LoginPageState extends State<LoginPage> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          width: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 50),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
-                  ),
+                    fillColor: Colors.white),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
                 ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                  ),
-                  obscureText: true,
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    login();
-                  },
-                  child: Text('Login'),
-                ),
-                SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
-                    );
-                  },
-                  child: Text("Sign Up"),
-                ),
-              ],
-            ),
+                obscureText: true,
+              ),
+              SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: () {
+                  login();
+                },
+                child: Text('Login'),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                  );
+                },
+                child: Text("Sign Up"),
+              ),
+            ],
           ),
         ),
       ),
