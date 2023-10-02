@@ -54,21 +54,29 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
               ),
               SizedBox(height: 50),
-              ElevatedButton(
-                onPressed: () {
-                  login();
-                },
-                child: Text('Login'),
+              SizedBox(
+                width: 500,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    login();
+                  },
+                  child: Text('Login & Explore '),
+                ),
               ),
               SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()),
-                  );
-                },
-                child: Text("Sign Up"),
+              SizedBox(
+                width: 500,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                    );
+                  },
+                  child: Text("New Member? Register here !!!"),
+                ),
               ),
             ],
           ),
