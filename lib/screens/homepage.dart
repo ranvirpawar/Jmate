@@ -19,7 +19,7 @@ class _HomepageState extends State<Homepage> {
 
   final List<Widget> _screens = [
     ShowRidePage(),
-     ConnectPage(),
+    ConnectPage(),
     PostRidePage(),
     NotificationScreen(),
     DisplayPage(),
@@ -87,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ],
                 selectedItemColor:
-                    Colors.deepPurple, // Set the selected item color
+                    Colors.orange, // Set the selected item color
                 unselectedItemColor:
                     Colors.black, // Set the unselected item color
               ),
