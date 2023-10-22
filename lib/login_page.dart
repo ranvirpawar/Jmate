@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 50),
               SizedBox(
-                width: 500,
+                width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 10),
               SizedBox(
-                width: 500,
+                width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
