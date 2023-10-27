@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Added import for FilteringTextInputFormatter
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -14,10 +15,11 @@ class _PostRidePageState extends State<PostRidePage> {
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _destinationController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
   final TextEditingController _seatsController = TextEditingController();
   final TextEditingController _rideCostController = TextEditingController();
   final List<String> _vehicleOptions = ['Bike', 'Car'];
-  String _selectedVehicle = 'Car'; // Default value is car
+  String _selectedVehicle = 'Car';
 
   User? _currentUser;
   DateTime? _selectedDate;
@@ -42,21 +44,37 @@ class _PostRidePageState extends State<PostRidePage> {
     _minimumDate = DateTime(now.year, now.month, now.day);
   }
 
+  bool _areAllFieldsFilled() {
+    return _sourceController.text.isNotEmpty &&
+        _destinationController.text.isNotEmpty &&
+        _dateController.text.isNotEmpty &&
+        _timeController.text.isNotEmpty &&
+        _seatsController.text.isNotEmpty &&
+        _rideCostController.text.isNotEmpty;
+  }
+
   void _postRide() {
     if (_currentUser != null) {
       String userId = _currentUser!.uid;
       String source = _sourceController.text;
       String destination = _destinationController.text;
       String date = _dateController.text;
+      String time = _timeController.text;
       String vehicle = _selectedVehicle;
-      int seats =
-          vehicle == 'Bike' ? 1 : int.tryParse(_seatsController.text) ?? 0;
+      int seats;
+
+      if (vehicle == 'Bike') {
+        seats = 1; // Force 1 seat for bikes
+      } else {
+        seats = int.tryParse(_seatsController.text) ?? 0;
+      }
       double rideCost = double.tryParse(_rideCostController.text) ?? 0.0;
 
       FirebaseFirestore.instance.collection('postride').add({
         'source': source,
         'destination': destination,
         'date': date,
+        'time': time,
         'seats': seats,
         'rideCost': rideCost,
         'driverId': userId,
@@ -109,9 +127,6 @@ class _PostRidePageState extends State<PostRidePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Post a Ride'),
-      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -129,6 +144,8 @@ class _PostRidePageState extends State<PostRidePage> {
             SizedBox(height: 10),
             _buildDateInput(),
             SizedBox(height: 10),
+            _buildTimeInput(),
+            SizedBox(height: 10),
             _buildVehicleDropdown(),
             SizedBox(height: 10),
             _buildStadiumTextField(
@@ -144,7 +161,7 @@ class _PostRidePageState extends State<PostRidePage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _postRide,
+              onPressed: _areAllFieldsFilled() ? _postRide : null,
               child: Text('Post Ride'),
             ),
           ],
@@ -169,6 +186,9 @@ class _PostRidePageState extends State<PostRidePage> {
           contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
         ),
         keyboardType: keyboardType,
+        inputFormatters: keyboardType == TextInputType.number
+            ? [FilteringTextInputFormatter.digitsOnly]
+            : [], // Added input formatter
       ),
     );
   }
@@ -193,6 +213,29 @@ class _PostRidePageState extends State<PostRidePage> {
         child: _buildStadiumTextField(
           controller: _dateController,
           labelText: 'Date',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeInput() {
+    return InkWell(
+      onTap: () {
+        DatePicker.showTimePicker(
+          context,
+          showTitleActions: true,
+          showSecondsColumn: false,
+          onConfirm: (time) {
+            setState(() {
+              _timeController.text = DateFormat('HH:mm').format(time);
+            });
+          },
+        );
+      },
+      child: AbsorbPointer(
+        child: _buildStadiumTextField(
+          controller: _timeController,
+          labelText: 'Time',
         ),
       ),
     );
