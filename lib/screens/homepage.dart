@@ -86,8 +86,7 @@ class _HomepageState extends State<Homepage> {
                     label: 'You',
                   ),
                 ],
-                selectedItemColor:
-                    Colors.orange, // Set the selected item color
+                selectedItemColor: Colors.orange, // Set the selected item color
                 unselectedItemColor:
                     Colors.black, // Set the unselected item color
               ),
