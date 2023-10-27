@@ -41,8 +41,7 @@ class ConnectPage extends StatelessWidget {
               return FutureBuilder<Map<String, dynamic>>(
                 future: _fetchUserData(userId, rideId),
                 builder: (context, userSnapshot) {
-                  if (userSnapshot.connectionState ==
-                      ConnectionState.waiting) {
+                  if (userSnapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator();
                   }
 
@@ -50,8 +49,10 @@ class ConnectPage extends StatelessWidget {
                     return SizedBox.shrink();
                   }
 
-                  Map<String, dynamic> userData = userSnapshot.data!['userData'];
-                  Map<String, dynamic> postRideData = userSnapshot.data!['postRideData'];
+                  Map<String, dynamic> userData =
+                      userSnapshot.data!['userData'];
+                  Map<String, dynamic> postRideData =
+                      userSnapshot.data!['postRideData'];
 
                   return RideCard(
                     username: userData['username'] ?? '',
@@ -69,11 +70,10 @@ class ConnectPage extends StatelessWidget {
     );
   }
 
-  Future<Map<String, dynamic>> _fetchUserData(String userId, String rideId) async {
-    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .get();
+  Future<Map<String, dynamic>> _fetchUserData(
+      String userId, String rideId) async {
+    DocumentSnapshot userSnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
     DocumentSnapshot postRideSnapshot = await FirebaseFirestore.instance
         .collection('postride')
@@ -81,7 +81,8 @@ class ConnectPage extends StatelessWidget {
         .get();
 
     Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
-    Map<String, dynamic> postRideData = postRideSnapshot.data() as Map<String, dynamic>;
+    Map<String, dynamic> postRideData =
+        postRideSnapshot.data() as Map<String, dynamic>;
 
     return {
       'userData': userData,
@@ -118,7 +119,8 @@ class RideCard extends StatelessWidget {
             SizedBox(height: 8.0),
             Text('Mobile Number: $mobileNumber'),
             SizedBox(height: 8.0),
-            Text('Interested in your journey from $source to $destination on $date'),
+            Text(
+                'Interested in your journey from $source to $destination on $date'),
           ],
         ),
       ),
