@@ -6,6 +6,7 @@ import 'profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'signup_page.dart';
 import 'postride.dart';
+import 'showride.dart';
 
 // import 'homepage.dart';
 // void main() {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/login',
       routes: {
-        '/profile': (context) => ProfilePage(),
+        //'/profile': (context) => ProfilePage(),
         '/signup': (context) => SignUpPage(),
         '/login': (context) => LoginPage(),
         '/display': (context) => DisplayPage(),

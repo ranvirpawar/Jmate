@@ -4,6 +4,7 @@ import 'package:jmate/display.dart';
 import 'package:jmate/postride.dart';
 import 'package:jmate/showride.dart';
 import 'package:jmate/connect.dart';
+import 'package:jmate/myrides.dart';
 
 void main() {
   runApp(Homepage());
@@ -21,7 +22,7 @@ class _HomepageState extends State<Homepage> {
     ShowRidePage(),
     ConnectPage(),
     PostRidePage(),
-    NotificationScreen(),
+    MyRidesPage(),
     DisplayPage(),
   ];
 
@@ -70,23 +71,24 @@ class _HomepageState extends State<Homepage> {
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.explore),
-                    label: 'Explore',
+                    icon: Icon(Icons.near_me),
+                    label: 'Connect',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.add),
                     label: 'Post',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications),
-                    label: 'Notifications',
+                    icon: Icon(Icons.directions_car),
+                    label: 'MyRides',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person),
                     label: 'You',
                   ),
                 ],
-                selectedItemColor: Colors.orange, // Set the selected item color
+                selectedItemColor:
+                    Colors.deepPurple, // Set the selected item color
                 unselectedItemColor:
                     Colors.black, // Set the unselected item color
               ),
@@ -143,14 +145,14 @@ class PostScreen extends StatelessWidget {
   }
 }
 
-class NotificationScreen extends StatelessWidget {
+class MyRideScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).canvasColor,
       child: Center(
         child: Text(
-          'Notification Screen',
+          'My Rides',
           style: TextStyle(color: Colors.black),
         ),
       ),
