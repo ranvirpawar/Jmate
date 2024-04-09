@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jmate/constants/images.dart';
 import 'package:jmate/signup_page.dart';
 import 'screens/homepage.dart';
 import 'display.dart';
@@ -22,13 +23,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Journey-Mate',
-          textAlign: TextAlign.center,
-        ),
-        centerTitle: true,
-      ),
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
@@ -36,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(loginImage),
               SizedBox(height: 50),
               TextFormField(
                 controller: _emailController,
@@ -61,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     login();
                   },
-                  child: Text('Login & Explore '),
+                  child: Text('Login'),
                 ),
               ),
               SizedBox(height: 10),

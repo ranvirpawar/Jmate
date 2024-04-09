@@ -8,12 +8,7 @@ import 'signup_page.dart';
 import 'postride.dart';
 import 'showride.dart';
 
-// import 'homepage.dart';
-// void main() {
-//   FirebaseApp.initializeApp();
 
-//   runApp(MyApp());
-// }
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
