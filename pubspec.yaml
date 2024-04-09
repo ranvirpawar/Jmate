@@ -18,7 +18,7 @@ dependencies:
   image_picker: ^0.8.9
   cloud_firestore: ^4.8.2
   datetime_picker_field_platform: ^0.0.1
-  flutter_datetime_picker: ^1.5.1
+  flutter_datetime_picker_plus: ^2.1.0
   google_fonts: ^4.0.4
 
 dev_dependencies:
@@ -28,5 +28,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-
+  assets:
+    - assets/images/login_signup/
+    - assets/images/welcome_screen/

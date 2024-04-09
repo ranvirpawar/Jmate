@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jmate/constants/images.dart';
+import 'package:jmate/constants/text_strings.dart';
 import 'package:jmate/signup_page.dart';
-import 'screens/homepage.dart';
-import 'display.dart';
+import '../../screens/homepage.dart';
+import '../../display.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -22,58 +24,112 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(loginImage),
-              SizedBox(height: 50),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
+    final size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image(
+                        image: AssetImage(loginImage),
+                        height: size.height * 0.2),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(loginScreenTitle,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 30, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    SizedBox(height: 5), // SizedBox(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          loginScreenSubTitle,
+                          style: GoogleFonts.montserrat(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 50),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.person_outline_outlined),
                     labelText: 'Email',
-                    border: OutlineInputBorder(),
-                    fillColor: Colors.white),
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
+                    hintText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2.0, color: Colors.black),
+                    ),
+                  ),
                 ),
-                obscureText: true,
-              ),
-              SizedBox(height: 50),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    login();
-                  },
-                  child: Text('Login'),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.security_outlined),
+                    labelText: "Password",
+                    hintText: "Password",
+                    suffixIcon: Icon(Icons.remove_red_eye_sharp),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2.0, color: Colors.black),
+                    ),
+                  ),
+                  obscureText: true,
                 ),
-              ),
-              SizedBox(height: 10),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
-                    );
-                  },
-                  child: Text("New Member? Register here !!!"),
+                SizedBox(height: 50),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      login();
+                    },
+                    child: Text('Login'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      backgroundColor: Colors.white,
+                      side: BorderSide(color: Colors.white),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()),
+                      );
+                    },
+                    child: Text("New Member? Register here !!!"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
