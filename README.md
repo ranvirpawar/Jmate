@@ -1,16 +1,45 @@
-# jmate
+# Journey Mate 
 
-A new Flutter project.
+Journey Mate is a ride-sharing mobile application built with Flutter and Firebase. It allows users to connect with others traveling from one place to another who have vacant seats.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- User registration and login
+- Post available rides  
+- Search and browse open rides
+- Send requests to connect with travelers
+- Accept or reject join requests 
+- View ride history
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter - UI framework
+- Firebase Auth - Authentication
+- Firebase Firestore - Database
+- Other Firebase services 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Getting Started  
+
+**Prerequisites:**
+
+- Flutter SDK
+- Android Studio/VS Code
+
+**Run app:**
+
+```
+- Clone repository
+- flutter pub get
+- Connect Firebase  
+- Run on device / emulator
+```
+
+## Scope for Future
+
+- In-app chat
+- Realtime tracking    
+- Online payments
+- Push notifications 
+
+## Contributors
+- Ranvir 
