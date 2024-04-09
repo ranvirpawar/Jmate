@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart%20';
 
-import 'booking.dart';
+import '../booking.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShowRidePage extends StatelessWidget {
@@ -114,9 +115,9 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -132,7 +133,7 @@ class PostCard extends StatelessWidget {
                 style: GoogleFonts.lato()),
             Text(
               'On ${date ?? ''} ${time ?? ''}',
-style: GoogleFonts.lato(),
+              style: GoogleFonts.lato(),
             ),
             Text(
               'Vehicle: ${vehicle ?? ''}', // Display the vehicle
@@ -144,79 +145,87 @@ style: GoogleFonts.lato(),
                 fontFamily: 'SansSerif', // Set the font family to sans serif
               ),
             ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () async {
-                User? currentUser = FirebaseAuth.instance.currentUser;
-                if (currentUser != null) {
-                  String userId = currentUser.uid;
-                  String connectRideId = rideId;
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons., color: Colors.yellow),
+                TextButton(
+                  onPressed: () async {
+                    User? currentUser = FirebaseAuth.instance.currentUser;
+                    if (currentUser != null) {
+                      String userId = currentUser.uid;
+                      String connectRideId = rideId;
 
-                  try {
-                    DocumentSnapshot rideSnapshot = await FirebaseFirestore
-                        .instance
-                        .collection('postride')
-                        .doc(connectRideId)
-                        .get();
-                    Map<String, dynamic> rideData =
-                        rideSnapshot.data() as Map<String, dynamic>;
+                      try {
+                        DocumentSnapshot rideSnapshot = await FirebaseFirestore
+                            .instance
+                            .collection('postride')
+                            .doc(connectRideId)
+                            .get();
+                        Map<String, dynamic> rideData =
+                            rideSnapshot.data() as Map<String, dynamic>;
 
-                    String source = rideData['source'] ?? '';
-                    String destination = rideData['destination'] ?? '';
-                    String date = rideData['date'] ?? '';
-                    String driverId = rideData['driverId'] ?? '';
+                        String source = rideData['source'] ?? '';
+                        String destination = rideData['destination'] ?? '';
+                        String date = rideData['date'] ?? '';
+                        String driverId = rideData['driverId'] ?? '';
 
-                    FirebaseFirestore.instance.collection('bookRide').add({
-                      'userId': currentUser.uid,
-                      'rideId': connectRideId,
-                      'source': source,
-                      'destination': destination,
-                      'date': date,
-                      'driverId': driverId,
-                      'username': username,
-                    });
+                        FirebaseFirestore.instance.collection('bookRide').add({
+                          'userId': currentUser.uid,
+                          'rideId': connectRideId,
+                          'source': source,
+                          'destination': destination,
+                          'date': date,
+                          'driverId': driverId,
+                          'username': username,
+                        });
 
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Success'),
-                          content: Text('Connection created successfully.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('OK'),
-                            ),
-                          ],
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Success'),
+                              content: Text('Connection created successfully.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
-                      },
-                    );
-                  } catch (error) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Error'),
-                          content: Text(
-                            'An error occurred while creating the connection.',
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('OK'),
-                            ),
-                          ],
+                      } catch (error) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content: const Text(
+                                'An error occurred while creating the connection.',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
-                      },
-                    );
-                  }
-                }
-              },
-              child: Text('Connect'),
+                      }
+                    }
+                  },
+                  child: const Text(
+                    'Connect',
+                  ),
+                ),
+              ],
             ),
           ],
         ),
