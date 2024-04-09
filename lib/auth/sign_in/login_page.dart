@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jmate/constants/images.dart';
+import 'package:jmate/auth/sign_in/login_footer_widget.dart';
+import 'package:jmate/constants/image_strings.dart';
+
 import 'package:jmate/constants/text_strings.dart';
-import 'package:jmate/signup_page.dart';
-import '../../screens/homepage.dart';
-import '../../display.dart';
+import 'package:jmate/src/signup_page.dart';
+
+import '../../src/homepage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -37,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image(
-                        image: AssetImage(loginImage),
+                        image: const AssetImage(loginScreenImage),
                         height: size.height * 0.2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -68,10 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     labelText: 'Email',
                     hintText: 'Email',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2.0, color: Colors.black),
+                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
                 ),
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: "Password",
                     suffixIcon: Icon(Icons.remove_red_eye_sharp),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(5),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2.0, color: Colors.black),
@@ -100,34 +99,15 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       login();
                     },
-                    child: Text('Login'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.black,
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.white),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10,
-                      ),
+                    child: Text(
+                      "LOGIN",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                 ),
                 SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()),
-                      );
-                    },
-                    child: Text("New Member? Register here !!!"),
-                  ),
-                ),
+                LoginFooterWidget(),
               ],
             ),
           ),

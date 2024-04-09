@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jmate/booking.dart';
-import 'package:jmate/display.dart';
-import 'package:jmate/postride.dart';
-import 'package:jmate/showride.dart';
-import 'package:jmate/connect.dart';
-import 'package:jmate/myrides.dart';
 
-void main() {
-  runApp(Homepage());
-}
+import 'package:jmate/src/display.dart';
+import 'package:jmate/src/postride.dart';
+import 'package:jmate/src/showride.dart';
+import 'package:jmate/src/connect.dart';
+import 'package:jmate/src/myrides.dart';
+
+
 
 class Homepage extends StatefulWidget {
   @override

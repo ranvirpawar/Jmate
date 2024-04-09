@@ -29,5 +29,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/login_signup/
-    - assets/images/welcome_screen/
+    - assets/images/auth_images/
+    - assets/images/on_boarding/
+    - assets/logo/
