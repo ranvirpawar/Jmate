@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart%20';
-
-import '../booking.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:jmate/auth/constants/image_strings.dart';
 
 class ShowRidePage extends StatelessWidget {
   @override
@@ -12,6 +12,31 @@ class ShowRidePage extends StatelessWidget {
     DateTime now = DateTime.now();
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            children: [
+              ClipOval(
+                child: Image.asset(travelGlobe, width: 50),
+              ),
+              const SizedBox(width: 10),
+              const Text(
+                'Journey-Mate',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        elevation: 0, // Remove the shadow below the AppBar
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('postride').snapshots(),
         builder: (context, snapshot) {
@@ -118,118 +143,221 @@ class PostCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: PostRideCardWidget(
+            username: username,
+            source: source,
+            destination: destination,
+            date: date,
+            time: time,
+            vehicle: vehicle,
+            cost: cost,
+            rideId: rideId),
+      ),
+    );
+  }
+}
+
+class PostRideCardWidget extends StatelessWidget {
+  const PostRideCardWidget({
+    super.key,
+    required this.username,
+    required this.source,
+    required this.destination,
+    required this.date,
+    required this.time,
+    required this.vehicle,
+    required this.cost,
+    required this.rideId,
+  });
+
+  final String username;
+  final String source;
+  final String destination;
+  final String date;
+  final String time;
+  final String vehicle;
+  final double cost;
+  final String rideId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
+            const Icon(
+              Icons.account_circle_rounded,
+              size: 25.0,
+              color: Colors.black,
+            ),
+            const SizedBox(width: 4.0),
             Text(
               '${username ?? ''}',
-              style: TextStyle(
-                fontSize: 16.0,
+              style: const TextStyle(
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8.0),
-            Text('Join me From ${source ?? ''} to ${destination ?? ''}',
-                style: GoogleFonts.lato()),
-            Text(
-              'On ${date ?? ''} ${time ?? ''}',
-              style: GoogleFonts.lato(),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Text(
+          'Join me from ${(source).toUpperCase() ?? ''}to ${(destination).toUpperCase() ?? ''}',
+          style: const TextStyle(
+            fontSize: 16.0,
+          ),
+        ),
+        const SizedBox(height: 4.0),
+        Row(
+          children: [
+            const Icon(
+              Icons.calendar_today,
+              size: 16.0,
+              color: Color.fromRGBO(195, 54, 2, 1),
             ),
+            const SizedBox(width: 4.0),
             Text(
-              'Vehicle: ${vehicle ?? ''}', // Display the vehicle
-              style: GoogleFonts.lato(),
-            ),
-            Text(
-              'Cost: ${cost.toStringAsFixed(2)}',
-              style: TextStyle(
-                fontFamily: 'SansSerif', // Set the font family to sans serif
+              DateFormat('EEE, MMM d, yyyy').format(DateTime.parse(date ?? '')),
+              style: const TextStyle(
+                fontSize: 14.0,
               ),
-            ),
-            SizedBox(height: 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(Icons., color: Colors.yellow),
-                TextButton(
-                  onPressed: () async {
-                    User? currentUser = FirebaseAuth.instance.currentUser;
-                    if (currentUser != null) {
-                      String userId = currentUser.uid;
-                      String connectRideId = rideId;
-
-                      try {
-                        DocumentSnapshot rideSnapshot = await FirebaseFirestore
-                            .instance
-                            .collection('postride')
-                            .doc(connectRideId)
-                            .get();
-                        Map<String, dynamic> rideData =
-                            rideSnapshot.data() as Map<String, dynamic>;
-
-                        String source = rideData['source'] ?? '';
-                        String destination = rideData['destination'] ?? '';
-                        String date = rideData['date'] ?? '';
-                        String driverId = rideData['driverId'] ?? '';
-
-                        FirebaseFirestore.instance.collection('bookRide').add({
-                          'userId': currentUser.uid,
-                          'rideId': connectRideId,
-                          'source': source,
-                          'destination': destination,
-                          'date': date,
-                          'driverId': driverId,
-                          'username': username,
-                        });
-
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Success'),
-                              content: Text('Connection created successfully.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      } catch (error) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Error'),
-                              content: const Text(
-                                'An error occurred while creating the connection.',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    }
-                  },
-                  child: const Text(
-                    'Connect',
-                  ),
-                ),
-              ],
             ),
           ],
         ),
-      ),
+        const SizedBox(height: 4.0),
+        Row(
+          children: [
+            const Icon(Icons.access_time, size: 16.0),
+            const SizedBox(width: 4.0),
+            Text(
+              DateFormat('hh:mm a')
+                  .format(DateTime.parse('${date ?? ''} ${time ?? ''}')),
+              style: const TextStyle(
+                fontSize: 14.0,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Row(
+          children: [
+            const Icon(Icons.directions_car, size: 16.0),
+            const SizedBox(width: 4.0),
+            Text(
+              'Vehicle: ${vehicle ?? ''}',
+              style: const TextStyle(
+                fontSize: 14.0,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        Row(
+          children: [
+            const Icon(Icons.currency_rupee, size: 16.0),
+            const SizedBox(width: 4.0),
+            Text(
+              'Cost: ₹ ${cost.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () async {
+                User? currentUser = FirebaseAuth.instance.currentUser;
+                if (currentUser != null) {
+                  String userId = currentUser.uid;
+                  String connectRideId = rideId;
+
+                  try {
+                    DocumentSnapshot rideSnapshot = await FirebaseFirestore
+                        .instance
+                        .collection('postride')
+                        .doc(connectRideId)
+                        .get();
+                    Map<String, dynamic> rideData =
+                        rideSnapshot.data() as Map<String, dynamic>;
+
+                    String source = rideData['source'] ?? '';
+                    String destination = rideData['destination'] ?? '';
+                    String date = rideData['date'] ?? '';
+                    String driverId = rideData['driverId'] ?? '';
+
+                    FirebaseFirestore.instance.collection('bookRide').add({
+                      'userId': currentUser.uid,
+                      'rideId': connectRideId,
+                      'source': source,
+                      'destination': destination,
+                      'date': date,
+                      'driverId': driverId,
+                      'username': username,
+                    });
+
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Success'),
+                          content: const Text('Connect request sent!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } catch (error) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text(
+                            'An error occurred while creating the connection.',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }
+              },
+              child: const Row(
+                children: [
+                  Text(
+                    'Connect',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  const SizedBox(width: 10),
+                  Icon(
+                    Icons.hail,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

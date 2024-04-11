@@ -25,23 +25,8 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Journey-Mate',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Roboto',
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.5,
-            ),
-          ),
-          backgroundColor: Colors.deepPurple,
-          elevation: 0, // Remove the shadow below the AppBar
-          centerTitle: true,
-        ),
         body: _screens[_currentIndex],
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(

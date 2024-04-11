@@ -10,7 +10,21 @@ class ConnectPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Rides'),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            'Journey-Mate',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+            ),
+          ),
+        ),
+
+        elevation: 0, // Remove the shadow below the AppBar
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('bookRide').snapshots(),

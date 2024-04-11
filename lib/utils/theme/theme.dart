@@ -4,6 +4,7 @@ import 'package:jmate/utils/theme/widget_theme/text_field_theme.dart';
 import 'package:jmate/utils/theme/widget_theme/text_theme.dart';
 import 'package:jmate/utils/theme/widget_theme/outlined_button_theme.dart';
 import 'package:jmate/utils/theme/widget_theme/elevated_button_theme.dart';
+import 'package:jmate/utils/theme/widget_theme/icon_theme.dart';
 
 class AppTheme {
   AppTheme._(); // making it private so that it is not instantiable
@@ -13,6 +14,7 @@ class AppTheme {
     outlinedButtonTheme: outlinedButtonTheme.lightOutlinedButtonTheme,
     elevatedButtonTheme: elevatedButtonTheme.lightElevatedButtonTheme,
     inputDecorationTheme: TextFormFieldTheme.lightInputDecorationTheme,
+    iconTheme: AppIconTheme.lightIconTheme,
   );
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.light,
@@ -20,5 +22,6 @@ class AppTheme {
     outlinedButtonTheme: outlinedButtonTheme.darkOutlinedButtonTheme,
     elevatedButtonTheme: elevatedButtonTheme.darkElevatedButtonTheme,
     inputDecorationTheme: TextFormFieldTheme.darkInputDecorationTheme,
+    iconTheme: AppIconTheme.darkIconTheme,
   );
 }

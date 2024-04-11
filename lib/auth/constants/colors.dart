@@ -8,4 +8,6 @@ const Color onBoardingColor3 = Color(0xffDCF6E6);
 
 const Color primaryColor = Color(0xffFFA451);
 const Color secondaryColor = Colors.black;
-const Color whiteColor = Colors.white;
+const Color whiteColor = Colors.white; 
+
+

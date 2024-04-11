@@ -20,6 +20,7 @@ dependencies:
   datetime_picker_field_platform: ^0.0.1
   flutter_datetime_picker_plus: ^2.1.0
   google_fonts: ^4.0.4
+  assets: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +33,5 @@ flutter:
     - assets/images/auth_images/
     - assets/images/on_boarding/
     - assets/logo/
+    - assets/logo/travel_globe.png
+    - assets/logo/jmate_brown.png

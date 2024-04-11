@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart%20';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
 import 'package:intl/intl.dart';
+import 'package:jmate/auth/constants/image_strings.dart';
 import 'package:jmate/src/homepage.dart';
 
 class PostRidePage extends StatefulWidget {
@@ -128,6 +130,32 @@ class _PostRidePageState extends State<PostRidePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Row(
+            children: [
+              ClipOval(
+                child: Image(
+                  image: AssetImage(travelGlobe),
+                  width: 50,
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Create your Journey',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        elevation: 0, // Remove the shadow below the AppBar
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(

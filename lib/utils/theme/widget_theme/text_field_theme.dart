@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart%20';
 
-import '../../../constants/colors.dart';
+import '../../../auth/constants/colors.dart';
 
 class TextFormFieldTheme {
   TextFormFieldTheme._(); // making it private so that it is not instantiable
