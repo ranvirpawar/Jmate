@@ -11,15 +11,15 @@ class ConnectPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.all(20.0),
+        title: const Padding(
+          padding:  EdgeInsets.all(20.0),
           child: Text(
-            'Journey-Mate',
+            'Connection Requests',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.5,
+              letterSpacing: 1,
             ),
           ),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jmate/auth/constants/image_strings.dart';
 import 'package:jmate/auth/sign_in/login_page.dart';
-
 
 class DisplayPage extends StatefulWidget {
   @override
@@ -52,7 +52,31 @@ class _DisplayPageState extends State<DisplayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            children: [
+              ClipOval(
+                child: Image.asset(travelGlobe, width: 50),
+              ),
+              const SizedBox(width: 10),
+              const Text(
+                'Profile',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        elevation: 0, // Remove the shadow below the AppBar
+      ),
       body: Center(
         child: _currentUser != null && _userDetails != null
             ? Container(
@@ -61,7 +85,7 @@ class _DisplayPageState extends State<DisplayPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      title: Text(
+                      title: const Text(
                         'Name',
                         style: TextStyle(
                           fontSize: 18,
@@ -72,7 +96,7 @@ class _DisplayPageState extends State<DisplayPage> {
                         '${_userDetails!['firstName']} ${_userDetails!['lastName']}',
                         style: TextStyle(fontSize: 16),
                       ),
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.person,
                         size: 30,
                       ),

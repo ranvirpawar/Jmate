@@ -10,7 +10,7 @@ class TextFormFieldTheme {
     prefixIconColor: secondaryColor,
     floatingLabelStyle: TextStyle(color: secondaryColor),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2.0, color: secondaryColor),
+      borderSide: BorderSide(width: 1.0, color: secondaryColor),
     ),
   );
 

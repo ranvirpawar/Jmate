@@ -27,7 +27,7 @@ class _MyRidesPageState extends State<MyRidesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Posted Rides'),
+        title: Text('Your Past Rides'),
       ),
       body: _currentUser != null
           ? _buildMyRidesList()
@@ -148,10 +148,4 @@ class PostCard extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: MyRidesPage(),
-  ));
 }
