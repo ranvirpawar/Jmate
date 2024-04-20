@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jmate/auth/constants/image_strings.dart';
+import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/auth/sign_in/login_page.dart';
 
 class DisplayPage extends StatefulWidget {

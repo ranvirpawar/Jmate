@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../auth/constants/colors.dart';
-import '../../../auth/constants/sizes.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/sizes.dart';
 
 class elevatedButtonTheme {
   elevatedButtonTheme._();

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart%20';
 
-import 'package:jmate/auth/constants/image_strings.dart';
+import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/src/show_ride_card/show_ride_widgets/ride_post_card_widget.dart';
 
 class ShowRidePage extends StatefulWidget {

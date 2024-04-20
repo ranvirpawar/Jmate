@@ -1,5 +1,7 @@
-import 'package:jmate/auth/constants/image_strings.dart';
-import 'package:jmate/auth/constants/text_strings.dart';
+
+
+import 'package:jmate/constants/image_strings.dart';
+import 'package:jmate/constants/text_strings.dart';
 
 class OnboardingContents {
   final String title;

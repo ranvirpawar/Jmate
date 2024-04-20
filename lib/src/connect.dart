@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:jmate/constants/image_strings.dart';
 
 class ConnectPage extends StatelessWidget {
   @override
@@ -12,18 +14,27 @@ class ConnectPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Padding(
-          padding:  EdgeInsets.all(20.0),
-          child: Text(
-            'Connection Requests',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
-            ),
+          padding: EdgeInsets.all(5.0),
+          child: Row(
+            children: [
+              ClipOval(
+                child: Image(
+                  image: AssetImage(travelGlobe),
+                  width: 50,
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Connection Requests',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
         ),
-
         elevation: 0, // Remove the shadow below the AppBar
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -129,12 +140,32 @@ class RideCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Username: $username'),
+            Row(
+              children: [
+                Icon(Icons.person_outline),
+                SizedBox(width: 8.0),
+                Text('Username: $username.'),
+              ],
+            ),
             SizedBox(height: 8.0),
-            Text('Mobile Number: $mobileNumber'),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.star_border_outlined),
+                Expanded(
+                  child: Text(
+                      ' Is interested in your journey from $source to $destination on $date'),
+                ),
+              ],
+            ),
             SizedBox(height: 8.0),
-            Text(
-                'Interested in your journey from $source to $destination on $date'),
+            Row(
+              children: [
+                Icon(Icons.phone),
+                SizedBox(width: 8.0),
+                Text('Mobile Number: $mobileNumber'),
+              ],
+            ),
           ],
         ),
       ),
