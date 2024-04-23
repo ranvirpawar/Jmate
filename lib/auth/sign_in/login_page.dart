@@ -4,10 +4,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jmate/auth/sign_in/login_footer_widget.dart';
-import 'package:jmate/auth/constants/image_strings.dart';
+import 'package:jmate/constants/image_strings.dart';
 
-import 'package:jmate/auth/constants/text_strings.dart';
-import 'package:jmate/src/signup_page.dart';
+import 'package:jmate/constants/text_strings.dart';
+import 'package:jmate/auth/sign_up/signup_page.dart';
 
 import '../../src/homepage.dart';
 

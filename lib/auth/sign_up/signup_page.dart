@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jmate/auth/sign_in/login_page.dart';
-
-
+import 'package:jmate/auth/sign_up/signup_header_widget.dart';
+import 'package:jmate/constants/image_strings.dart';
+import 'package:jmate/constants/text_strings.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -13,18 +13,15 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  // Create TextEditingController objects to retrieve user input
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController =
-      TextEditingController(); //email
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-  // Create a DatabaseReference object to interact with the Firebase Realtime Database
   final DatabaseReference _databaseReference =
       FirebaseDatabase.instance.reference();
 
@@ -35,52 +32,94 @@ class _SignUpPageState extends State<SignUpPage> {
         title: Text('Sign Up'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(
+            form_header_widget(
+                image: signUpScreenImage,
+                title: signupTitle,
+                subTitle: signupSubTitle),
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _firstNameController,
-              decoration: InputDecoration(labelText: 'First Name'),
+              labelText: 'First Name',
+              icon: Icons.person,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _lastNameController,
-              decoration: InputDecoration(labelText: 'Last Name'),
+              labelText: 'Last Name',
+              icon: Icons.person,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              labelText: 'Username',
+              icon: Icons.account_circle,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              labelText: 'Email',
+              icon: Icons.email,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _mobileNumberController,
-              decoration: InputDecoration(labelText: 'Mobile Number'),
+              labelText: 'Mobile Number',
+              icon: Icons.phone,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              labelText: 'Password',
+              icon: Icons.lock,
               obscureText: true,
             ),
-            TextFormField(
+            SizedBox(height: 16), // Adding space between fields
+            TextFormFieldWithIcon(
               controller: _confirmPasswordController,
-              decoration: InputDecoration(labelText: 'Confirm Password'),
+              labelText: 'Confirm Password',
+              icon: Icons.lock,
               obscureText: true,
             ),
-            ElevatedButton(
-              onPressed: () {
-                signUp();
-              },
-              child: Text('Sign Up'),
+            SizedBox(height: 16), // Adding space between fields
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: signUp,
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                },
-                child: Text("Login"))
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ),
+                );
+              },
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                        text: alreadyHaveAnAccount,
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                        text: login.toUpperCase(),
+                        style: TextStyle(color: Colors.blue)),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -88,7 +127,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void signUp() async {
-    // Retrieve the user input from the text controllers
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
     String username = _usernameController.text;
@@ -97,7 +135,6 @@ class _SignUpPageState extends State<SignUpPage> {
     String password = _passwordController.text;
     String confirmPassword = _confirmPasswordController.text;
 
-    // Validate the user input
     if (firstName.isEmpty ||
         lastName.isEmpty ||
         username.isEmpty ||
@@ -147,24 +184,18 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     try {
-      // Create the user with email and password
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email, // Use the email as the username
+        email: email,
         password: password,
       );
 
-      // Store additional user data in the Firebase Realtime Database
       String userId = userCredential.user!.uid;
-      print("$userId dfjskdfj");
       User user = User(firstName, lastName, username, mobileNumber, password);
-      print("${user.toJson()} helo");
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
       users.doc(userId).set(user.toJson());
-      // _databaseReference.child('users').child(userId).set(user.toJson());
 
-      // Show a success dialog
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -174,7 +205,6 @@ class _SignUpPageState extends State<SignUpPage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  // Navigate to the login page
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -189,7 +219,6 @@ class _SignUpPageState extends State<SignUpPage> {
         },
       );
     } catch (error) {
-      // Show an error dialog
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -230,5 +259,31 @@ class User {
       'mobileNumber': mobileNumber,
       'password': password,
     };
+  }
+}
+
+class TextFormFieldWithIcon extends StatelessWidget {
+  final TextEditingController controller;
+  final String labelText;
+  final IconData icon;
+  final bool obscureText;
+
+  TextFormFieldWithIcon({
+    required this.controller,
+    required this.labelText,
+    required this.icon,
+    this.obscureText = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        prefixIcon: Icon(icon),
+      ),
+      obscureText: obscureText,
+    );
   }
 }

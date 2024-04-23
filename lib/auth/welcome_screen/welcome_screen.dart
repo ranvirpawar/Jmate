@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jmate/auth/sign_in/login_page.dart';
-import 'package:jmate/auth/constants/colors.dart';
-import 'package:jmate/auth/constants/image_strings.dart';
 
-import 'package:jmate/auth/constants/text_strings.dart';
-import 'package:jmate/src/signup_page.dart';
+import 'package:jmate/auth/sign_in/login_page.dart';
+import 'package:jmate/constants/colors.dart';
+import 'package:jmate/constants/image_strings.dart';
+
+import 'package:jmate/constants/text_strings.dart';
+import 'package:jmate/auth/sign_up/signup_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

@@ -8,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:jmate/auth/welcome_screen/welcome_screen.dart';
 import 'package:jmate/src/display.dart';
 import 'package:jmate/src/postride.dart';
-import 'package:jmate/src/signup_page.dart';
+import 'package:jmate/auth/sign_up/signup_page.dart';
 import 'package:jmate/utils/theme/theme.dart';
 
 Future main() async {
