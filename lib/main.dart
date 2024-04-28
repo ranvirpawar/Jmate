@@ -5,6 +5,7 @@ import 'package:jmate/auth/sign_in/login_page.dart';
 // import 'package:jmate/screens/homepage%20.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:jmate/auth/splash_screen/splash_screen.dart';
 import 'package:jmate/auth/welcome_screen/welcome_screen.dart';
 import 'package:jmate/src/display.dart';
 import 'package:jmate/src/postride.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: '/welcome',
+      
+      initialRoute: '/splashscreen',
       routes: {
         //'/profile': (context) => ProfilePage(),
         '/signup': (context) => SignUpPage(),
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/display': (context) => DisplayPage(),
         '/postride': (context) => PostRidePage(),
         '/welcome': (context) => const WelcomeScreen(),
+        '/splashscreen': (context) => const SplashScreen(),
       },
     );
   }

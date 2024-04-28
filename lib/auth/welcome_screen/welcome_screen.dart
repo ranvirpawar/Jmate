@@ -69,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                           side: const BorderSide(color: Colors.black),
                         ),
-                        child: Text(login,
+                        child: Text(loginText,
                             style: GoogleFonts.montserrat(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,

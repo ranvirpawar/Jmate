@@ -11,3 +11,11 @@ const Color secondaryColor = Colors.black;
 const Color whiteColor = Colors.white; 
 
 
+// green color
+
+const Color darkGreen = Color(0xff3A6431);
+const Color lightGreen = Color(0xffaA5C697);
+const Color yellow = Color(0xffEEC153);
+
+
+

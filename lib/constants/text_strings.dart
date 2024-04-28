@@ -1,8 +1,8 @@
-const String appName = 'Journey Mate';
+const String appName = 'Journey-Mate';
 const String appTagLine = 'your travel companion \nat your fingertips';
 
 //generic texts
-const String login = 'Login';
+const String loginText = 'Login';
 const String signUp = 'Sign-Up';
 const String email = 'E-Mail';
 const String password = 'Password';

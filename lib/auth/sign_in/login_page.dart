@@ -5,9 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jmate/auth/sign_in/login_footer_widget.dart';
 import 'package:jmate/constants/image_strings.dart';
-
 import 'package:jmate/constants/text_strings.dart';
-import 'package:jmate/auth/sign_up/signup_page.dart';
 
 import '../../src/homepage.dart';
 
@@ -27,89 +25,86 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image(
-                        image: const AssetImage(loginScreenImage),
-                        height: size.height * 0.2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(loginScreenTitle,
-                            style: GoogleFonts.montserrat(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    SizedBox(height: 5), // SizedBox(
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          loginScreenSubTitle,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image(
+                      image: const AssetImage(loginScreenImage),
+                      height: size.height * 0.2),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(loginScreenTitle,
                           style: GoogleFonts.montserrat(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    labelText: 'Email',
-                    hintText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+                              fontSize: 30, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const SizedBox(height: 5), // SizedBox(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        loginScreenSubTitle,
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  labelText: 'Email',
+                  hintText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
-                SizedBox(height: 20),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.security_outlined),
-                    labelText: "Password",
-                    hintText: "Password",
-                    suffixIcon: Icon(Icons.remove_red_eye_sharp),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2.0, color: Colors.black),
-                    ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.security_outlined),
+                  labelText: "Password",
+                  hintText: "Password",
+                  suffixIcon: const Icon(Icons.remove_red_eye_sharp),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  obscureText: true,
-                ),
-                SizedBox(height: 50),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      login();
-                    },
-                    child: Text(
-                      "LOGIN",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0, color: Colors.black),
                   ),
                 ),
-                SizedBox(height: 10),
-                LoginFooterWidget(),
-              ],
-            ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 50),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    login();
+                  },
+                  child: const Text(
+                    loginText,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const LoginFooterWidget(),
+            ],
           ),
         ),
       ),

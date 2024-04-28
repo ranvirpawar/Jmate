@@ -36,29 +36,29 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            form_header_widget(
+           const  form_header_widget(
                 image: signUpScreenImage,
                 title: signupTitle,
                 subTitle: signupSubTitle),
-            SizedBox(height: 16), // Adding space between fields
+           const  SizedBox(height: 16), // Adding space between fields
             TextFormFieldWithIcon(
               controller: _firstNameController,
               labelText: 'First Name',
               icon: Icons.person,
             ),
-            SizedBox(height: 16), // Adding space between fields
+            const SizedBox(height: 16), // Adding space between fields
             TextFormFieldWithIcon(
               controller: _lastNameController,
               labelText: 'Last Name',
               icon: Icons.person,
             ),
-            SizedBox(height: 16), // Adding space between fields
+            const SizedBox(height: 16), // Adding space between fields
             TextFormFieldWithIcon(
               controller: _usernameController,
               labelText: 'Username',
               icon: Icons.account_circle,
             ),
-            SizedBox(height: 16), // Adding space between fields
+            const SizedBox(height: 16), // Adding space between fields
             TextFormFieldWithIcon(
               controller: _emailController,
               labelText: 'Email',
@@ -114,8 +114,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         text: alreadyHaveAnAccount,
                         style: TextStyle(color: Colors.black)),
                     TextSpan(
-                        text: login.toUpperCase(),
-                        style: TextStyle(color: Colors.blue)),
+                        text: loginText.toUpperCase(),
+                        style: const TextStyle(color: Colors.blue)),
                   ],
                 ),
               ),

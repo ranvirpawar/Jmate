@@ -37,7 +37,7 @@ class PostRideCardWidget extends StatelessWidget {
               size: 25.0,
               color: Colors.black,
             ),
-            const SizedBox(width: 4.0),
+            const SizedBox(width: 8.0),
             Text(
               '${username ?? ''}',
               style: const TextStyle(
@@ -49,7 +49,7 @@ class PostRideCardWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Join me from ${(source).toUpperCase() ?? ''}to ${(destination).toUpperCase() ?? ''}',
+          'Join me from ${(source).toUpperCase() ?? ''} to ${(destination).toUpperCase() ?? ''}',
           style: const TextStyle(
             fontSize: 16.0,
           ),

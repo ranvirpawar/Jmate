@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart%20';
+import 'package:jmate/constants/text_strings.dart';
 
 import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/src/show_ride_card/show_ride_widgets/ride_post_card_widget.dart';
@@ -42,7 +43,7 @@ class _ShowRidePageState extends State<ShowRidePage> {
               ),
               const SizedBox(width: 10),
               const Text(
-                'Journey-Mate',
+                appName,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -202,6 +203,7 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
