@@ -15,15 +15,15 @@ Journey Mate is a ride-sharing mobile application built with Flutter and Firebas
 
 ![Welcome Screen](screenshots/welcome_screen.jpg?raw=true "Welcome Screen")
 
-![login Screen](screenshots\sign_in_screen.jpg?raw=true "login Screen")
+![login Screen](screenshots/sign_in_screen.jpg?raw=true "login Screen")
 
-![Home Screen](screenshots\home_screen.jpg?raw=true "Home Screen")
+![Home Screen](screenshots/home_screen.jpg?raw=true "Home Screen")
 
-![{ Post ride Screen](screenshots\create_ride.jpg?raw=true "Create Journey Screen")
+![{ Post ride Screen](screenshots/create_ride.jpg?raw=true "Create Journey Screen")
 
-![{ Conect Screen](screenshots\connection_req.jpg?raw=true "Connect Screen")
+![{ Conect Screen](screenshots/connection_req.jpg?raw=true "Connect Screen")
 
-![{ Past Ride Screen](screenshots\past_rides.jpg?raw=true "Pash Rides Screen")
+![{ Past Ride Screen](screenshots/past_rides.jpg?raw=true "Pash Rides Screen")
 
 ## Technologies
 
