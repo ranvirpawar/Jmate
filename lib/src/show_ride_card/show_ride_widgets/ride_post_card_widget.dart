@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jmate/constants/icon_strings.dart';
 
 class PostRideCardWidget extends StatelessWidget {
   const PostRideCardWidget({
@@ -57,12 +58,9 @@ class PostRideCardWidget extends StatelessWidget {
         const SizedBox(height: 4.0),
         Row(
           children: [
-            const Icon(
-              Icons.calendar_today,
-              size: 16.0,
-              color: Color.fromRGBO(195, 54, 2, 1),
-            ),
-            const SizedBox(width: 4.0),
+            ClipOval(
+                child: Image.asset(calendarIcon, height: 20.0, width: 20.0)),
+            const SizedBox(width: 10.0),
             Text(
               DateFormat('EEE, MMM d, yyyy').format(DateTime.parse(date ?? '')),
               style: const TextStyle(
@@ -71,11 +69,11 @@ class PostRideCardWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 4.0),
+        const SizedBox(height: 10.0),
         Row(
           children: [
-            const Icon(Icons.access_time, size: 16.0),
-            const SizedBox(width: 4.0),
+            ClipOval(child: Image.asset(timeIcon, height: 20.0, width: 20.0)),
+            const SizedBox(width: 10.0),
             Text(
               DateFormat('hh:mm a')
                   .format(DateTime.parse('${date ?? ''} ${time ?? ''}')),
@@ -85,11 +83,11 @@ class PostRideCardWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 10.0),
         Row(
           children: [
-            const Icon(Icons.directions_car, size: 16.0),
-            const SizedBox(width: 4.0),
+            ClipOval(child: Image.asset(carIcon, height: 20.0, width: 20.0)),
+            const SizedBox(width: 10.0),
             Text(
               'Vehicle: ${vehicle ?? ''}',
               style: const TextStyle(

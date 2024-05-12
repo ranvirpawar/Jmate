@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:jmate/auth/sign_in/login_page.dart';
+import 'package:jmate/auth/sign_in/sign_in_screen.dart';
 import 'package:jmate/constants/colors.dart';
 import 'package:jmate/constants/image_strings.dart';
 

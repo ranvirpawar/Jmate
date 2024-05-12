@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jmate/constants/colors.dart';
 
 import 'package:jmate/src/display.dart';
 import 'package:jmate/src/postride.dart';
@@ -41,7 +42,7 @@ class _HomepageState extends State<Homepage> {
                 _currentIndex = index;
               });
             },
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
@@ -63,39 +64,10 @@ class _HomepageState extends State<Homepage> {
                 label: 'You',
               ),
             ],
-            selectedItemColor: Colors.deepPurple, // Set the selected item color
-            unselectedItemColor: Colors.black, // Set the unselected item color
+            selectedItemColor: primaryColor, // Set the selected item color
+            unselectedItemColor:
+                Colors.black.withOpacity(0.8), // Set the unselected item color
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'Home Screen',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
-
-class ExploreScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'Explore Screen',
-          style: TextStyle(color: Colors.black),
         ),
       ),
     );
@@ -110,36 +82,6 @@ class PostScreen extends StatelessWidget {
       child: Center(
         child: Text(
           'Post Screen',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
-
-class MyRideScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'My Rides',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
-
-class YouScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'You Screen',
           style: TextStyle(color: Colors.black),
         ),
       ),

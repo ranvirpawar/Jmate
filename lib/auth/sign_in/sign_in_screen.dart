@@ -4,10 +4,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jmate/auth/sign_in/login_footer_widget.dart';
+import 'package:jmate/constants/colors.dart';
 import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/constants/text_strings.dart';
 
-import '../../src/homepage.dart';
+import '../../src/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -63,7 +64,10 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  prefixIcon: const Icon(
+                    Icons.person_outline_outlined,
+                    color: primaryColor,
+                  ),
                   labelText: 'Email',
                   hintText: 'Email',
                   border: OutlineInputBorder(
@@ -75,10 +79,16 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.security_outlined),
+                  prefixIcon: const Icon(
+                    Icons.security_outlined,
+                    color: primaryColor,
+                  ),
                   labelText: "Password",
                   hintText: "Password",
-                  suffixIcon: const Icon(Icons.remove_red_eye_sharp),
+                  suffixIcon: const Icon(
+                    Icons.remove_red_eye_sharp,
+                    color: primaryColor,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
