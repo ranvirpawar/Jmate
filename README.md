@@ -1,6 +1,6 @@
 # Journey Mate
 
-Journey Mate is a ride-sharing mobile application built with Flutter and Firebase. It allows users to connect with others traveling from one place to another who have vacant seats.
+Journey Mate is a ride-sharing mobile application built with Flutter and Firebase. It allows users to connect with others traveling from one place to another.
 
 ## Features
 
