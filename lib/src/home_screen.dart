@@ -14,7 +14,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-
+  // list of screens to navigate through bottomnavigationbar
   final List<Widget> _screens = [
     ShowRidePage(),
     ConnectPage(),
@@ -64,9 +64,9 @@ class _HomepageState extends State<Homepage> {
                 label: 'You',
               ),
             ],
-            selectedItemColor: primaryColor, // Set the selected item color
+            selectedItemColor: primaryColor, 
             unselectedItemColor:
-                Colors.black.withOpacity(0.8), // Set the unselected item color
+                Colors.black.withOpacity(0.8), 
           ),
         ),
       ),
@@ -74,17 +74,4 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class PostScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'Post Screen',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
+
