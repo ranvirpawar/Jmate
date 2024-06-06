@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.person_outline_outlined,
-                    color: primaryColor,
+                    color: appBlackColor,
                   ),
                   labelText: 'Email',
                   hintText: 'Email',
@@ -81,13 +81,13 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.security_outlined,
-                    color: primaryColor,
+                    color: appBlackColor,
                   ),
                   labelText: "Password",
                   hintText: "Password",
                   suffixIcon: const Icon(
                     Icons.remove_red_eye_sharp,
-                    color: primaryColor,
+                    color: appBlackColor,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),

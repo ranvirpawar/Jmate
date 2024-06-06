@@ -10,8 +10,8 @@ class outlinedButtonTheme {
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      foregroundColor: secondaryColor,
-      side: BorderSide(color: secondaryColor),
+      foregroundColor: appBlackColor,
+      side: BorderSide(color: appBlackColor),
       padding: EdgeInsets.symmetric(
         vertical: buttonHeight,
       ),

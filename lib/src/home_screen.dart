@@ -64,7 +64,7 @@ class _HomepageState extends State<Homepage> {
                 label: 'You',
               ),
             ],
-            selectedItemColor: primaryColor, 
+            selectedItemColor: appBlackColor, 
             unselectedItemColor:
                 Colors.black.withOpacity(0.8), 
           ),

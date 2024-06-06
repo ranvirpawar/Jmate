@@ -1,29 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
 
 import '../../../constants/colors.dart';
 
 class TextFormFieldTheme {
   TextFormFieldTheme._(); // making it private so that it is not instantiable
-  static InputDecorationTheme lightInputDecorationTheme =
-      const InputDecorationTheme(
-    border: OutlineInputBorder(),
-    prefixIconColor: secondaryColor,
-    floatingLabelStyle: TextStyle(color: secondaryColor),
+  static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
+    border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 1.0, color: secondaryColor),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
     ),
+    fillColor: Colors.grey[100],
+    filled: true,
+    hintStyle: TextStyle(color: Colors.grey),
+    floatingLabelStyle: TextStyle(color: appBlackColor),
   );
 
   static InputDecorationTheme darkInputDecorationTheme =
       const InputDecorationTheme(
     border: OutlineInputBorder(),
     prefixIconColor: whiteColor,
-    floatingLabelStyle: TextStyle(color: primaryColor),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        width: 2.0,
-        color: primaryColor,
-      ),
-    ),
+    floatingLabelStyle: TextStyle(color: appBlackColor),
+    focusedBorder: OutlineInputBorder(),
   );
 }
