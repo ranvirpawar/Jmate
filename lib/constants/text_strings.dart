@@ -64,9 +64,15 @@ const String otpSubTitle = 'Verification';
 const String otpMessage = 'Enter the OTP sent at';
 
 // profile Screen
-
 const String profile = 'Profile';
 const String editProfile = 'Edit Profile';
 const String logoutDialogHeading = 'Logout';
 const String profileHeading = 'Hey, traveler!';
 const String profileSubHeading = 'Update your profile to get started';
+
+
+// connection page
+const String connectionRequest = 'Connection Request';
+
+//Crete Ride Screen
+const String ok = 'Ok';

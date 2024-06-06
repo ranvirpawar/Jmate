@@ -8,12 +8,14 @@ import 'package:intl/intl.dart';
 import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/src/home_screen.dart';
 
-class PostRidePage extends StatefulWidget {
+import '../constants/text_strings.dart';
+
+class CreateRideScreen extends StatefulWidget {
   @override
-  _PostRidePageState createState() => _PostRidePageState();
+  _CreateRideScreenState createState() => _CreateRideScreenState();
 }
 
-class _PostRidePageState extends State<PostRidePage> {
+class _CreateRideScreenState extends State<CreateRideScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _sourceController = TextEditingController();
   final TextEditingController _destinationController = TextEditingController();
@@ -57,20 +59,14 @@ class _PostRidePageState extends State<PostRidePage> {
   }
 
   void _postRide() {
-    if (_currentUser != null) {
+    if (_formKey.currentState!.validate() && _currentUser != null) {
       String userId = _currentUser!.uid;
       String source = _sourceController.text;
       String destination = _destinationController.text;
       String date = _dateController.text;
       String time = _timeController.text;
       String vehicle = _selectedVehicle;
-      int seats;
-
-      if (vehicle == 'Bike') {
-        seats = 1; // Force 1 seat for bikes
-      } else {
-        seats = int.tryParse(_seatsController.text) ?? 0;
-      }
+      int seats = int.tryParse(_seatsController.text) ?? 0;
       double rideCost = double.tryParse(_rideCostController.text) ?? 0.0;
 
       FirebaseFirestore.instance.collection('postride').add({
@@ -99,7 +95,7 @@ class _PostRidePageState extends State<PostRidePage> {
                       ),
                     );
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -133,7 +129,7 @@ class _PostRidePageState extends State<PostRidePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Padding(
-          padding: EdgeInsets.all(5.0),
+          padding:  EdgeInsets.all(5.0),
           child: Row(
             children: [
               ClipOval(
@@ -157,39 +153,48 @@ class _PostRidePageState extends State<PostRidePage> {
         elevation: 0, // Remove the shadow below the AppBar
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildStadiumTextField(
-                controller: _sourceController,
-                labelText: 'Source',
-              ),
-              SizedBox(height: 10),
-              _buildStadiumTextField(
-                controller: _destinationController,
-                labelText: 'Destination',
-              ),
-              const SizedBox(height: 10),
-              _buildDateInput(),
-              const SizedBox(height: 10),
-              _buildTimeInput(),
-              const SizedBox(height: 10),
-              _buildVehicleDropdown(),
-              const SizedBox(height: 10),
-              _buildStadiumTextField(
-                controller: _rideCostController,
-                labelText: 'Ride Cost',
-                keyboardType: TextInputType.number,
-              ),
-             const  SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _areAllFieldsFilled() ? _postRide : null,
-                child: Text('Post Ride'),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+
+                _buildStadiumTextField(
+                  controller: _sourceController,
+                  labelText: 'Source',
+                  iconData: Icons.car_rental
+                ),
+                const SizedBox(height: 10),
+                _buildStadiumTextField(
+                  controller: _destinationController,
+                  labelText: 'Destination',
+                ),
+                SizedBox(height: 10),
+                _buildDateInput(),
+                SizedBox(height: 10),
+                _buildTimeInput(),
+                SizedBox(height: 10),
+                _buildVehicleDropdown(),
+                SizedBox(height: 10),
+                _buildStadiumTextField(
+                  controller: _rideCostController,
+                  labelText: 'Ride Cost',
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _areAllFieldsFilled() ? _postRide : null,
+                  child: Text('Post Ride'),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -199,14 +204,18 @@ class _PostRidePageState extends State<PostRidePage> {
   Widget _buildStadiumTextField({
     required TextEditingController controller,
     required String labelText,
+    IconData? iconData,
+
     TextInputType? keyboardType,
   }) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
+        prefixIcon:  iconData != null ? Icon(iconData) : null,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(5.0),
+
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
       ),
@@ -224,6 +233,7 @@ class _PostRidePageState extends State<PostRidePage> {
   }
 
   Widget _buildDateInput() {
+    
     return InkWell(
       onTap: () {
         DatePicker.showDatePicker(
@@ -289,6 +299,7 @@ class _PostRidePageState extends State<PostRidePage> {
               _selectedVehicle = newValue!;
               if (_selectedVehicle == 'Bike') {
                 _seatsController.text = '1';
+
               } else {
                 _seatsController.text = '1'; // default to 1 for car
               }
@@ -296,7 +307,7 @@ class _PostRidePageState extends State<PostRidePage> {
           },
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
           ),
@@ -314,11 +325,11 @@ class _PostRidePageState extends State<PostRidePage> {
           items: _selectedVehicle == 'Bike'
               ? [DropdownMenuItem<int>(value: 1, child: Text('1'))]
               : [
-                  DropdownMenuItem<int>(value: 1, child: Text('1')),
-                  DropdownMenuItem<int>(value: 2, child: Text('2')),
-                  DropdownMenuItem<int>(value: 3, child: Text('3')),
-                  DropdownMenuItem<int>(value: 4, child: Text('4')),
-                ],
+            DropdownMenuItem<int>(value: 1, child: Text('1')),
+            DropdownMenuItem<int>(value: 2, child: Text('2')),
+            DropdownMenuItem<int>(value: 3, child: Text('3')),
+            DropdownMenuItem<int>(value: 4, child: Text('4')),
+          ],
           onChanged: (int? newValue) {
             setState(() {
               _seatsController.text = newValue.toString();
@@ -326,7 +337,7 @@ class _PostRidePageState extends State<PostRidePage> {
           },
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
           ),

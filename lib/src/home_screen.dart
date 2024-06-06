@@ -3,7 +3,7 @@ import 'package:jmate/constants/colors.dart';
 
 import 'package:jmate/src/display.dart';
 import 'package:jmate/src/postride.dart';
-import 'package:jmate/src/show_ride_card/showride.dart';
+import 'package:jmate/src/showride.dart';
 import 'package:jmate/src/connect.dart';
 import 'package:jmate/src/myrides.dart';
 
@@ -18,7 +18,7 @@ class _HomepageState extends State<Homepage> {
   final List<Widget> _screens = [
     ShowRidePage(),
     ConnectPage(),
-    PostRidePage(),
+    CreateRideScreen(),
     MyRidesPage(),
     DisplayPage(),
   ];
@@ -74,17 +74,4 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class PostScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).canvasColor,
-      child: Center(
-        child: Text(
-          'Post Screen',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
+

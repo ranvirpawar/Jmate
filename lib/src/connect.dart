@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jmate/constants/image_strings.dart';
+import 'package:jmate/constants/text_strings.dart';
 
 class ConnectPage extends StatelessWidget {
   @override
@@ -25,7 +26,7 @@ class ConnectPage extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Text(
-                'Connection Requests',
+                connectionRequest,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
