@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jmate/constants/colors.dart';
 import 'package:jmate/constants/image_strings.dart';
+import 'package:jmate/utils/theme/theme.dart';
 
 class ConnectPage extends StatelessWidget {
   @override
@@ -45,11 +48,11 @@ class ConnectPage extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Text('No rides available');
+            return const Text('No rides available');
           }
 
           return ListView(
@@ -60,18 +63,19 @@ class ConnectPage extends StatelessWidget {
               String driverId = data['driverId'] ?? '';
 
               if (userId == currentUserId || driverId != currentUserId) {
-                return SizedBox.shrink(); // Exclude non-relevant ride details
+                return const SizedBox
+                    .shrink(); // Exclude non-relevant ride details
               }
 
               return FutureBuilder<Map<String, dynamic>>(
                 future: _fetchUserData(userId, rideId),
                 builder: (context, userSnapshot) {
                   if (userSnapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
 
                   if (!userSnapshot.hasData) {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
 
                   Map<String, dynamic> userData =
@@ -133,39 +137,118 @@ class RideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Card(
-      margin: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: [
-                Icon(Icons.person_outline),
-                SizedBox(width: 8.0),
-                Text('Username: $username.'),
-              ],
-            ),
-            SizedBox(height: 8.0),
-            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.star_border_outlined),
+                const Icon(Icons.person_outline),
+                const SizedBox(width: 8.0),
                 Expanded(
-                  child: Text(
-                      ' Is interested in your journey from $source to $destination on $date'),
+                  child: RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                      text: '$username : ',
+                      style: textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: 'is interested in your journey from',
+                      style: textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.w300),
+                    ),
+                    TextSpan(
+                      text: ' $source ',
+                      style: textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: 'to',
+                      style: textTheme.bodyMedium?.copyWith(),
+                    ),
+                    TextSpan(
+                      text: ' $destination ',
+                      style: textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: 'on',
+                      style: textTheme.bodyMedium?.copyWith(),
+                    ),
+                    TextSpan(
+                      text: ' $date',
+                      style: textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ])),
                 ),
               ],
             ),
-            SizedBox(height: 8.0),
+            // Row(
+            //   children: [
+            //     Icon(Icons.person_outline),
+            //     SizedBox(width: 8.0),
+            //     Text('$username.'),
+            //   ],
+            // ),
+            // const SizedBox(height: 8.0),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     const Icon(Icons.star_border_outlined),
+            //     Expanded(
+            //       child: Text(
+            //           ' Is interested in your journey from $source to $destination on $date'),
+            //     ),
+            //   ],
+            // ),
+            const SizedBox(height: 8.0),
             Row(
               children: [
-                Icon(Icons.phone),
-                SizedBox(width: 8.0),
-                Text('Mobile Number: $mobileNumber'),
+                const Icon(Icons.phone),
+                const SizedBox(width: 8.0),
+                Text(
+                  'Mobile Number: $mobileNumber',
+                ),
               ],
             ),
+            const SizedBox(height: 8.0),
+
+            // card to show options : chat , accept , reject\
+            Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // chat button
+                  TextButton(
+                    onPressed: () {},
+                    child: Text('Chat',
+                        style: TextStyle(
+                            color: appRedColor, fontWeight: FontWeight.w500)),
+                  ),
+                  // accept button
+                  TextButton(
+                      onPressed: () {},
+                      child: Text('Accept',
+                          style: TextStyle(
+                              color: appRedColor,
+                              fontWeight: FontWeight.w500))),
+                  // reject button
+                  TextButton(
+                      onPressed: () {},
+                      child: Text('Reject',
+                          style: TextStyle(
+                              color: appRedColor,
+                              fontWeight: FontWeight.w500))),
+                ],
+              ),
+            )
           ],
         ),
       ),
