@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jmate/auth/sign_in/login_footer_widget.dart';
+import 'package:jmate/features/auth/sign_in/login_footer_widget.dart';
 import 'package:jmate/constants/colors.dart';
 import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/constants/text_strings.dart';
 
-import '../../src/home_screen.dart';
+import '../../home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override

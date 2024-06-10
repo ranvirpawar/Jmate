@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jmate/constants/colors.dart';
 import 'package:jmate/constants/image_strings.dart';
+import 'package:jmate/features/chat_screen/chat_screen.dart';
 import 'package:jmate/utils/theme/theme.dart';
 
 class ConnectPage extends StatelessWidget {
@@ -126,6 +127,7 @@ class RideCard extends StatelessWidget {
   final String source;
   final String destination;
   final String date;
+  final String? email;
 
   RideCard({
     required this.username,
@@ -133,7 +135,18 @@ class RideCard extends StatelessWidget {
     required this.source,
     required this.destination,
     required this.date,
+    this.email,
   });
+
+  void _chatScreen(BuildContext context) {
+    // navigate to chat screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChatScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -190,24 +203,7 @@ class RideCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Row(
-            //   children: [
-            //     Icon(Icons.person_outline),
-            //     SizedBox(width: 8.0),
-            //     Text('$username.'),
-            //   ],
-            // ),
-            // const SizedBox(height: 8.0),
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     const Icon(Icons.star_border_outlined),
-            //     Expanded(
-            //       child: Text(
-            //           ' Is interested in your journey from $source to $destination on $date'),
-            //     ),
-            //   ],
-            // ),
+
             const SizedBox(height: 8.0),
             Row(
               children: [
@@ -227,7 +223,7 @@ class RideCard extends StatelessWidget {
                 children: [
                   // chat button
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => _chatScreen(context),
                     child: Text('Chat',
                         style: TextStyle(
                             color: appRedColor, fontWeight: FontWeight.w500)),

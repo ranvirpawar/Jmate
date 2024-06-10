@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:jmate/auth/sign_in/sign_in_screen.dart';
+import 'package:jmate/features/auth/sign_in/sign_in_screen.dart';
 // import 'package:jmate/screens/homepage%20.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:jmate/auth/splash_screen/splash_screen.dart';
-import 'package:jmate/auth/welcome_screen/welcome_screen.dart';
-import 'package:jmate/src/display.dart';
-import 'package:jmate/src/postride.dart';
-import 'package:jmate/auth/sign_up/signup_page.dart';
+import 'package:jmate/features/auth/splash_screen/splash_screen.dart';
+import 'package:jmate/features/auth/welcome_screen/welcome_screen.dart';
+import 'package:jmate/features/display.dart';
+import 'package:jmate/features/postride.dart';
+import 'package:jmate/features/auth/sign_up/signup_page.dart';
 import 'package:jmate/utils/theme/theme.dart';
 
 Future main() async {

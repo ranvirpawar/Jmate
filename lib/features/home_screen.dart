@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jmate/constants/colors.dart';
 
-import 'package:jmate/src/display.dart';
-import 'package:jmate/src/postride.dart';
-import 'package:jmate/src/show_ride_card/showride.dart';
-import 'package:jmate/src/connect.dart';
-import 'package:jmate/src/myrides.dart';
+import 'package:jmate/features/display.dart';
+import 'package:jmate/features/postride.dart';
+import 'package:jmate/features/show_ride_card/showride.dart';
+import 'package:jmate/features/connect.dart';
+import 'package:jmate/features/myrides.dart';
 
 class Homepage extends StatefulWidget {
   @override

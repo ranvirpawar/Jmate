@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jmate/constants/colors.dart';
 
-import 'package:jmate/auth/onboarding/onboarding_screen/on_boarding_screen_contents.dart';
-import 'package:jmate/auth/onboarding/onboarding_screen/on_boarding_size_config.dart';
+import 'package:jmate/features/auth/onboarding/onboarding_screen/on_boarding_screen_contents.dart';
+import 'package:jmate/features/auth/onboarding/onboarding_screen/on_boarding_size_config.dart';
 
 
 class OnboardingScreen extends StatefulWidget {

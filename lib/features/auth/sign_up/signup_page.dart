@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jmate/auth/sign_in/sign_in_screen.dart';
-import 'package:jmate/auth/sign_up/signup_header_widget.dart';
+import 'package:jmate/features/auth/sign_in/sign_in_screen.dart';
+import 'package:jmate/features/auth/sign_up/signup_header_widget.dart';
 import 'package:jmate/constants/image_strings.dart';
 import 'package:jmate/constants/text_strings.dart';
 
