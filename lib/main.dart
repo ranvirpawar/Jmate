@@ -1,15 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:jmate/features/auth/sign_in/sign_in_screen.dart';
-// import 'package:jmate/screens/homepage%20.dart';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:jmate/features/auth/splash_screen/splash_screen.dart';
-import 'package:jmate/features/auth/welcome_screen/welcome_screen.dart';
-import 'package:jmate/features/display.dart';
-import 'package:jmate/features/postride.dart';
-import 'package:jmate/features/auth/sign_up/signup_page.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:jmate/presentation/splash_screen/splash_screen.dart';
 import 'package:jmate/utils/theme/theme.dart';
 
 Future main() async {
@@ -23,20 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      
-      initialRoute: '/splashscreen',
-      routes: {
-        //'/profile': (context) => ProfilePage(),
-        '/signup': (context) => SignUpPage(),
-        '/login': (context) => LoginPage(),
-        '/display': (context) => DisplayPage(),
-        '/postride': (context) => PostRidePage(),
-        '/welcome': (context) => const WelcomeScreen(),
-        '/splashscreen': (context) => const SplashScreen(),
-      },
+      home: SplashScreen(),
     );
   }
 }
